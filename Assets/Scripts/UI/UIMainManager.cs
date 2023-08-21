@@ -11,6 +11,8 @@ public class UIMainManager : MonoBehaviour
 
     private GameManager m_gameManager;
 
+    private GameManager.eLevelMode m_levelMode;
+
     private void Awake()
     {
         m_menuList = GetComponentsInChildren<IMenu>(true);
@@ -104,14 +106,29 @@ public class UIMainManager : MonoBehaviour
         m_gameManager.SetState(GameManager.eStateGame.PAUSE);
     }
 
+    internal void ReloadLevel()
+    {
+        m_gameManager.ClearLevel();
+        if(m_levelMode == GameManager.eLevelMode.MOVES)
+        {
+            LoadLevelMoves();
+        }
+        else if(m_levelMode == GameManager.eLevelMode.TIMER)
+        {
+            LoadLevelTimer();
+        }
+    }
+
     internal void LoadLevelMoves()
     {
         m_gameManager.LoadLevel(GameManager.eLevelMode.MOVES);
+        m_levelMode = GameManager.eLevelMode.MOVES;
     }
 
     internal void LoadLevelTimer()
     {
         m_gameManager.LoadLevel(GameManager.eLevelMode.TIMER);
+        m_levelMode = GameManager.eLevelMode.TIMER;
     }
 
     internal void ShowGameMenu()

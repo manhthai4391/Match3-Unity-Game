@@ -147,7 +147,9 @@ public class Board
 
                 NormalItem item = new NormalItem();
 
-                item.SetType(Utils.GetRandomNormalType());
+                NormalItem.eNormalType[] typesToExclude = cell.GetNeighborItemTypes();
+                
+                item.SetType(Utils.GetRandomNormalTypeExcept(typesToExclude));
                 item.SetView();
                 item.SetViewRoot(m_root);
 
